@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ABBstract Art</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      text-align: justify;
+      margin: 30px auto;
+      width: 95%;
+      max-width: 950px;
+    }
+
+    .media-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      display: block;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+      gap: 2%;
+      margin-bottom: 25px;
+    }
+
+    .side-by-side img {
+      width: 49%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ABBstract Art</h1>
+
+  <div class="container">
+
+    <div class="text-block">
+      <p>This project frames human-robot interaction as a co-creative performance. The robots collaborate with two humans in a timed painting exchange, offering wooden blocks to be painted before retrieving and stacking them into a choreographed composition.</p>
+    </div>
+
+    <div class="media-container">
+      <img src="photos_robotics/Photo_1.jpg" alt="Robotics Photo 1">
+
+      <!-- Video added below Photo 1 -->
+      <video controls>
+        <source src="photos_robotics/video_1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="side-by-side">
+        <img src="photos_robotics/Photo_2.jpg" alt="Robotics Photo 2">
+        <img src="photos_robotics/Photo_3.jpg" alt="Robotics Photo 3">
+      </div>
+
+      <div class="text-block">
+        <p>Fusce nec tellus sed augue semper porta. Mauris massa.</p>
+      </div>
+
+      <img src="photos_robotics/Photo_4.jpg" alt="Robotics Photo 4">
+      <img src="photos_robotics/Photo_5.jpg" alt="Robotics Photo 5">
+
+      <div class="text-block">
+        <p>Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus.</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
+
