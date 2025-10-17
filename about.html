@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>About - Rajvi Ranjit Patil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: white;
-      font-family: Arial, sans-serif;
+      font-family: 'Nunito', sans-serif;
       margin: 0;
       padding: 0;
     }
@@ -21,12 +24,15 @@
       font-size: 3em;
       margin-top: 40px;
       text-align: center;
+      font-family: 'Roboto', sans-serif;
     }
 
     h3 {
       text-align: center;
       font-weight: normal;
       margin-top: -20px;
+      font-family: 'Roboto', sans-serif;
+      color: #888;
     }
 
     .cv-link {
@@ -53,6 +59,7 @@
       margin: 30px auto;
       width: 95%;
       max-width: 950px;
+      color: #888;
     }
 
     .media-container {
@@ -66,6 +73,7 @@
       width: 100%;
       display: block;
       margin-bottom: 25px;
+      border-radius: 12px;
     }
 
     .side-by-side {
@@ -77,10 +85,50 @@
 
     .side-by-side img {
       width: 24%;
+      border-radius: 12px;
+    }
+    /* Following ball */
+    .follow-ball {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle, rgba(0, 128, 128, 0.6) 0%, rgba(0, 128, 128, 0.2) 70%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease-out;
+      mix-blend-mode: multiply;
+      box-shadow: 0 0 15px rgba(0, 128, 128, 0.3);
+    }
+
+    /* Sparkle trail */
+    .sparkle {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: rgba(0, 128, 128, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      animation: sparkleFade 1s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Following ball -->
+  <div class="follow-ball" id="followBall"></div>
 
 <canvas id="bubbleCanvas"></canvas>
 
@@ -206,6 +254,59 @@
 
   initBubbles();
   animate();
+
+  // Following ball functionality with sparkles
+  const followBall = document.getElementById('followBall');
+  let followMouseX = 0;
+  let followMouseY = 0;
+  let followBallX = 0;
+  let followBallY = 0;
+  let followSpeed = 0.1;
+  let lastFollowBallX = 0;
+  let lastFollowBallY = 0;
+  let sparkleCounter = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    followMouseX = e.clientX;
+    followMouseY = e.clientY;
+  });
+
+  function createSparkle(x, y) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = x + 'px';
+    sparkle.style.top = y + 'px';
+    document.body.appendChild(sparkle);
+    
+    setTimeout(() => {
+      if (sparkle.parentNode) {
+        sparkle.parentNode.removeChild(sparkle);
+      }
+    }, 1000);
+  }
+
+  function followAnimate() {
+    lastFollowBallX = followBallX;
+    lastFollowBallY = followBallY;
+    
+    followBallX += (followMouseX - followBallX) * followSpeed;
+    followBallY += (followMouseY - followBallY) * followSpeed;
+    
+    followBall.style.left = followBallX - 6 + 'px';
+    followBall.style.top = followBallY - 6 + 'px';
+    
+    // Create sparkles occasionally
+    sparkleCounter++;
+    if (sparkleCounter % 3 === 0 && (Math.abs(followBallX - lastFollowBallX) > 2 || Math.abs(followBallY - lastFollowBallY) > 2)) {
+      const offsetX = (Math.random() - 0.5) * 20;
+      const offsetY = (Math.random() - 0.5) * 20;
+      createSparkle(followBallX + offsetX, followBallY + offsetY);
+    }
+    
+    requestAnimationFrame(followAnimate);
+  }
+
+  followAnimate();
 </script>
 
 </body>
