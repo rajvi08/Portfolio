@@ -1,0 +1,9 @@
+@echo off
+echo Adding all changes...
+git add -A
+echo Committing changes...
+git commit -m "Remove LFS and push images as regular files"
+echo Pushing to GitHub...
+git push origin main --force
+echo Done!
+pause
